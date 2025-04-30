@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { SideBar } from "./SideBar";
 import { chapters } from "../chapters";
 import { videoDataArray } from "../videoData";
+import OutsideClickHandler from 'react-outside-click-handler';
+import menu from "../menu.png"
 
 // Helper to extract YouTube video ID from embed link
 const getYoutubeID = (url: string) => {
@@ -36,13 +38,14 @@ export const Home = () => {
     <main className="flex min-h-screen md:pl-8 px-4 bg-[#fffaeb] py-12">
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden fixed top-4 left-4 z-30 bg-[#bd8e63] text-white px-3 py-2 rounded"
+        className="md:hidden h-[40px] w-[40px] fixed top-4 left-4 z-30 bg-[#bd8e63] text-white px-2 py-2 rounded"
         onClick={() => setSidebarOpen(true)}
       >
-        ☰
+        <img src = {menu} alt = "menu"/>
       </button>
 
       {/* Sidebar */}
+
       <SideBar
         setSelectedChapter={(index) => {
           setSelectedChapter(index);
@@ -52,10 +55,11 @@ export const Home = () => {
         isOpen={sidebarOpen}
         closeSidebar={() => setSidebarOpen(false)}
       />
+
       <div className="flex flex-col gap-6 max-w-4xl mx-auto mt-8 items-center w-full">
         {/* Big Main Video Player */}
         {mainVideo && (
-          <div className="flex justify-center md:h-[450px] md:w-[800px] h-[250px] w-[350px]">
+          <div className="flex justify-center sm:h-[300px] md:h-[400px] lg:h-[500px] sm:w-[350px] md:w-[650px] lg:w-[700px]">
             <iframe
               width="100%"
               height="100%"
@@ -73,9 +77,8 @@ export const Home = () => {
               key={index}
               src={`https://img.youtube.com/vi/${getYoutubeID(videoSrc)}/0.jpg`}
               onClick={() => setMainVideo(videoSrc)}
-              className={`w-40 h-24 object-cover rounded cursor-pointer border-2 ${
-                mainVideo === videoSrc ? "ring-4 ring-[#624221]" : ""
-              }`}
+              className={`w-40 h-24 object-cover rounded cursor-pointer border-2 ${mainVideo === videoSrc ? "ring-4 ring-[#624221]" : ""
+                }`}
               alt={`Thumbnail ${index + 1}`}
             />
           ))}
@@ -84,13 +87,13 @@ export const Home = () => {
         {/* Section Links */}
 
         {selectedChapter !== null && (
-          <div className="w-full max-w-[640px] bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden">
+          <div className="w-full max-w-[500px] bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden">
             <div className="bg-gradient-to-r from-[#f9d7b4] to-[#d5a778] px-6 py-4">
-              <h2 className="text-xl font-bold text-[#583b1e] text-center">
+              <h2 className="text-xl font-bold text-black text-center">
                 📖 Chapter Sections
               </h2>
             </div>
-            <div className="flex flex-col divide-y divide-blue-100">
+            <div className="flex flex-col divide-y divide-blue-100 text-left">
               {chapters[selectedChapter].pages.map((page, index) => (
                 <a
                   key={index}
@@ -99,7 +102,7 @@ export const Home = () => {
                   rel="noreferrer"
                   className="group flex items-center justify-between px-6 py-4 transition-colors hover:bg-[#fff6de] underline decoration-[#fff6de]"
                 >
-                  <span className="text-[#624221] font-medium group-hover:underline">
+                  <span className="w-[90%] text-[#624221] font-medium group-hover:underline">
                     {page.title}
                   </span>
                   <svg
