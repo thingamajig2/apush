@@ -56,10 +56,10 @@ export const Home = () => {
         closeSidebar={() => setSidebarOpen(false)}
       />
 
-      <div className="flex flex-col gap-6 max-w-4xl mx-auto mt-8 items-center w-full">
+      <div className="flex flex-col gap-6 mx-auto mt-8 items-center w-full pl-5 pr-4 lg:pl-10 lg:pr-8">
         {/* Big Main Video Player */}
         {mainVideo && (
-          <div className="flex justify-center sm:h-[300px] md:h-[400px] lg:h-[500px] sm:w-[350px] md:w-[650px] lg:w-[700px]">
+          <div className="flex justify-center h-[275px] md:h-[475px] w-full">
             <iframe
               width="100%"
               height="100%"
@@ -71,7 +71,7 @@ export const Home = () => {
             ></iframe>
           </div>
         )}
-        <div className="md:w-[800px] w-[350px] overflow-x-auto whitespace-nowrap flex gap-4 py-4">
+        <div className="md:w-full w-[350px] overflow-x-auto whitespace-nowrap flex gap-4 py-4">
           {currentVideos.map((videoSrc, index) => (
             <img
               key={index}
@@ -87,7 +87,7 @@ export const Home = () => {
         {/* Section Links */}
 
         {selectedChapter !== null && (
-          <div className="w-full max-w-[500px] bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden">
+          <div className="w-full bg-white rounded-3xl shadow-xl border border-blue-100 overflow-hidden">
             <div className="bg-gradient-to-r from-[#f9d7b4] to-[#d5a778] px-6 py-4">
               <h2 className="text-xl font-bold text-black text-center">
                 📖 Chapter Sections
